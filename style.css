@@ -9,6 +9,8 @@ body {
   font-family: sans-serif;
   font-size: large;
   height: 100%;
+  min-height: 700px;
+  min-width: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
