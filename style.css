@@ -23,6 +23,8 @@ body {
   align-items: center;
   height: 700px;
   width: 700px;
+  min-height: 700px;
+  min-width: 700px;
   border-radius: 50%;
   border: 7px solid #282828;
   box-shadow: -4px -4px 10px rgba(67, 67, 67, 0.5),
