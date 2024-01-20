@@ -1,41 +1,35 @@
-var center = document.querySelectorAll(".center")[0];
-var second = document.querySelectorAll(".second > div");
-var minute = document.querySelectorAll(".minute > div");
-var hour = document.querySelectorAll(".hour > div");
+const center = document.querySelector(".center");
+const secondElements = document.querySelectorAll(".second > div");
+const minuteElements = document.querySelectorAll(".minute > div");
+const hourElements = document.querySelectorAll(".hour > div");
 
-setInterval(() => {
-  var curTime = new Date();
+const update = () => {
+  const curTime = new Date();
 
   center.innerHTML = curTime.getHours() < 12 ? "AM" : "PM";
 
-  var curSecond = addZeroBefore(curTime.getSeconds());
-  second.forEach((x) => (x.innerHTML = curSecond));
+  const curSecond = addZeroBefore(curTime.getSeconds());
+  secondElements.forEach((element) => (element.innerHTML = curSecond));
 
-  var curMinute = addZeroBefore(curTime.getMinutes());
-  minute.forEach((x) => (x.innerHTML = curMinute));
+  const curMinute = addZeroBefore(curTime.getMinutes());
+  minuteElements.forEach((element) => (element.innerHTML = curMinute));
 
-  var curHour = addZeroBefore(curTime.getHours() % 12 || 12);
-  hour.forEach((x) => (x.innerHTML = curHour));
-}, 1000);
-
-var addZeroBefore = function (n) {
-  return (n < 10 ? "0" : "") + n;
+  const curHour = addZeroBefore(curTime.getHours() % 12 || 12);
+  hourElements.forEach((element) => (element.innerHTML = curHour));
 };
 
+const addZeroBefore = (n) => (n < 10 ? "0" : "") + n;
+
+setInterval(update, 1000);
+
 window.onload = () => {
-  var curTime = new Date();
+  update();
 
-  center.innerHTML = curTime.getHours() < 12 ? "AM" : "PM";
+  const curTime = new Date();
+  const delay =
+    curTime.getHours() * 3600 +
+    curTime.getMinutes() * 60 +
+    curTime.getSeconds();
 
-  var curSecond = addZeroBefore(curTime.getSeconds());
-  second.forEach((x) => (x.innerHTML = curSecond));
-
-  var curMinute = addZeroBefore(curTime.getMinutes());
-  minute.forEach((x) => (x.innerHTML = curMinute));
-
-  var curHour = addZeroBefore(curTime.getHours() % 12 || 12);
-  hour.forEach((x) => (x.innerHTML = curHour));
-
-  var delay = - curHour * 3600 - curMinute * 60 - curSecond;
-  document.querySelector(".clock").style.cssText = `--delay: ${delay}s`;
+  document.querySelector(".clock").style.cssText = `--delay: ${-delay}s`;
 };
